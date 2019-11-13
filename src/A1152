@@ -1,0 +1,40 @@
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+using namespace std;
+
+typedef long long LL;
+
+bool isPrimer(LL x) {
+    if (x == 2) return true;
+    for (LL i = 2; i * i <= x; i++) {
+        if (x % i == 0) {
+            return false;
+        }
+    }
+    return true;
+}
+
+int main() {
+    int l, k;
+    string s;
+    cin >> l >> k;
+    int MOD = (int)pow(10, k);
+    cin >> s;
+    LL ans = 404;
+    LL cur = 0;
+    for (int i = 0; i < l; i++) {
+        cur = cur * 10 + s[i] - '0';
+        cur = cur % MOD;
+        if (i < k - 1) {
+            continue;
+        }
+        if (isPrimer(cur)) {
+            ans = cur;
+            break;
+        }
+
+    }
+    if (ans != 404) cout << std::setfill('0') << std::setw(k) << ans << endl;
+    else cout << ans << endl;
+}
